@@ -14,10 +14,12 @@ app.get('/search/:search', (req, res) => {
     // COULDN'T FIGURE OUT WHY PARAMS WEREN'T WORKING
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${search}`)
         .then(({data}) => {
-            console.log('Should have cocktails here! ', data)
+            console.log('Should have cocktails here! ', data['drinks'][0])
+            res.send(data['drinks'])
         })
         .catch(error => {
             console.log('error: ', error)
+            res.sendStatus(401)
         })
 })
 
